@@ -1,39 +1,45 @@
 
 
-from mvl_make_dailies.common_utils import getPythonPackagePath, getConfigPath, getNukeExecutablePath, gatherFrameRange, logger, isValidFrameRange, isvalidPath
+from mvl_make_dailies.common_utils import get_python_package_path, get_nuke_executable_path, gather_frame_range, logger, is_valid_frame_range, is_valid_path
 import os
 import sys  
 import subprocess
 import tempfile
 import argparse
  
-def createMoveFromSequence(args):
-    
+def create_movie_from_sequence(args):
+    """
+    Create a movie from an image sequence using Nuke.
+    This function uses Nuke to render a movie from an image sequence, adhering to dailies best practices.
+    Args:
+        args (argparse.Namespace): Parsed command line arguments.
+    """
+
     dcc_name = "nuke"
     try:
-        launcher_path = os.path.join(getPythonPackagePath(), "mvl_make_dailies", "nuke", "main.py")
+        launcher_path = os.path.join(get_python_package_path(), "mvl_make_dailies", "nuke", "main.py")
         if not os.path.exists(launcher_path):    
             logger.error(f"Nuke launcher script not found: {launcher_path}")
             sys.exit(1) 
         
-        if not isvalidPath(os.path.dirname(args.input)):
+        if not is_valid_path(os.path.dirname(args.input)):
             logger.error(f"Input file sequence path is invalid: {args.input}")
             sys.exit(1)
         if os.path.exists(args.output):
             logger.warning(f"Output file already exists: {args.output}. It will be overwritten.")
 
         file_sequence_path = args.input
-        if isValidFrameRange(args.start, args.end):
+        if is_valid_frame_range(args.start, args.end):
             frame_range = range(args.start,args.end)
         else:
-            frame_range = gatherFrameRange(os.path.dirname(file_sequence_path)) # This will raise an error if the sequence is invalid
+            frame_range = gather_frame_range(os.path.dirname(file_sequence_path)) # This will raise an error if the sequence is invalid
         
         mov_file_path = args.output
         if not mov_file_path.lower().endswith(('.mov')):
             logger.error("Output file must be a .mov file.")
             sys.exit(1)
 
-        nuke_exe = getNukeExecutablePath()
+        nuke_exe = get_nuke_executable_path()
         cmd = " ".join([nuke_exe,"-F", f"{frame_range.start}-{frame_range.stop}", "-x", launcher_path, file_sequence_path, mov_file_path])
         
         logger.info(f"Running Nuke render command: {cmd}")
@@ -65,5 +71,5 @@ def createMoveFromSequence(args):
 # Command/Strategy mapping
 APP_MODE_COMMANDS = {
     "playblast_maya": None, # Placeholder for Maya playblast command
-    "daily": createMoveFromSequence,
+    "daily": create_movie_from_sequence,
 }

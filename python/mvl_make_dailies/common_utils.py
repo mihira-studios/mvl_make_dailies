@@ -13,7 +13,7 @@ formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(messag
 error_handler.setFormatter(formatter)
 logger.addHandler(error_handler)
 
-def gatPackagePath()->str:
+def get_package_path()->str:
     """
     Get the package path for the mvl_make_dailies package.
     This function retrieves the path from the environment variable REZ_MVL_MAKE_DAILIES_ROOT,  
@@ -24,7 +24,7 @@ def gatPackagePath()->str:
     """
     return os.environ.get('REZ_MVL_MAKE_DAILIES_ROOT', '')
 
-def getPythonPackagePath()->str:
+def get_python_package_path()->str:
     """
     Get the package path for the mvl_make_dailies package.
     This function retrieves the path from the environment variable REZ_MVL_MAKE_DAILIES_ROOT,  
@@ -46,7 +46,7 @@ def getPythonPackagePath()->str:
     
     return package_python_path
 
-def getConfigPath()->str:
+def get_config_path()->str:
     """
     Get the configuration path for the mvl_make_dailies package.
     This function retrieves the path from the environment variable REZ_MVL_MAKE_DAILIES_ROOT,
@@ -55,10 +55,10 @@ def getConfigPath()->str:
     Returns:
         str: The normalized path to the mvl_make_dailies package's config directory.
     """
-    return os.path.join(gatPackagePath(), 'configs')
+    return os.path.join(get_package_path(), 'configs')
 
 
-def getNukeExecutablePath()->str:
+def get_nuke_executable_path()->str:
     """
     Get the Nuke root path from the environment variable REZ_NUKE_ROOT.
     If the variable is not set, it defaults to the current working directory.
@@ -78,7 +78,7 @@ def getNukeExecutablePath()->str:
     return os.path.normpath(nuke_executable_path)
 
 
-def gatherFrameRange(sequence_path) -> range:
+def gather_frame_range(sequence_path) -> range:
     """
     Collect the frame range from a file sequence path.
     This function assumes the sequence is named with a pattern like
@@ -133,7 +133,7 @@ def gatherFrameRange(sequence_path) -> range:
     return range(start, end ) 
 
 
-def isValidFrameRange(start, stop):
+def is_valid_frame_range(start, stop):
     """
     Check if the provided frame range is valid.
     A valid range must have start < stop and both must be non-negative integers.
@@ -162,7 +162,7 @@ def isValidFrameRange(start, stop):
     logger.info(f"Valid frame range: {start} to {stop}")
     return True 
 
-def createTempFile(prefix="mvl_make_dailies", suffix="nk") -> str:
+def create_temp_file(prefix="mvl_make_dailies", suffix="nk") -> str:
     """
     Create a temporary file with a unique name.
     The file will be created in the system's temporary directory.
@@ -176,7 +176,7 @@ def createTempFile(prefix="mvl_make_dailies", suffix="nk") -> str:
     logger.info(f"Created temporary file: {temp_file.name}")
     return temp_file.name
 
-def isvalidPath(path):
+def is_valid_path(path):
     """
     Check if the provided path is valid.
     A valid path must be a string and not empty.

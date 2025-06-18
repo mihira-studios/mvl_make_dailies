@@ -9,7 +9,6 @@ import re
 
 # Import common utilities
 from mvl_make_dailies.common_utils import logger 
-from mvl_make_dailies.common_utils import getPythonPackagePath, getNukeExecutablePath, getConfigPath, isValidFrameRange
 from mvl_make_dailies.movie_commands import APP_MODE_COMMANDS
 
 

@@ -5,9 +5,9 @@ import argparse
 import os
 import sys
 import subprocess
-from mvl_make_dailies.common_utils import logger, createTempFile
+from mvl_make_dailies.common_utils import logger, create_temp_file
 
-def generateMovie(
+def generate_movie(
     sequence_path,
     output_mov_path,  
     input_colorspace="linear", 
@@ -54,18 +54,17 @@ def generateMovie(
     # Connect the Read node to the Write node
     write_node.setInput(0, read_node)
     
-    tempfile = createTempFile(prefix="mvl_make_dailies", suffix="nk") # Create a temporary Nuke script file
-    logger.info(f"Nuke script created for: {tempfile}")
+    temp_file = create_temp_file(prefix="mvl_make_dailies", suffix="nk") # Create a temporary Nuke script file
+    logger.info(f"Nuke script created for: {temp_file}")
     logger.info(f"Output path: {output_mov_path}")
     
     # Render the script
     logger.info("Rendering...")
-    nuke.execute(write_node, 1001, 1010) # Example frame range, adjust as needed
+    nuke.execute(write_node, int(frame_start), int(frame_stop)) # Example frame range, adjust as needed
     logger.info("Rendering complete!")
 
-    nuke.scriptSave(tempfile)
-    logger.info(f"Nuke script saved to: {tempfile}")
-
+    nuke.scriptSave(temp_file)
+    logger.info(f"Nuke script saved to: {temp_file}")
 
 
 def main():
@@ -87,7 +86,7 @@ def main():
     mov_file_path = str(sys.argv[2])
     
     try:
-        scriptPath = generateMovie(
+        scriptPath = generate_movie(
             sequence_path=file_sequence_path ,
             output_mov_path=mov_file_path,
         )
