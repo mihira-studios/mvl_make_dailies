@@ -1,0 +1,1 @@
+python "%REZ_MVL_MAKE_DAILIES_ROOT%\\python\\mvl_make_dailies\\generate_movie.py" %*
