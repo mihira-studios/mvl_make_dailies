@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-import sys
 
 name = 'mvl_make_dailies'
 version = '0.1.0'
@@ -11,7 +9,7 @@ authors = ['DEEPAK THAPLIYAL']
 help = [['README', 'README.md']] # Optional: If you have a README file
 
 requires = [
-    'nuke',  
+    'nuke',
     "mvl_core_pipeline",
     '~python-3',    
                      
@@ -30,27 +28,6 @@ private_build_requires = [
 tools = [
     'generate_movie', # This refers to the alias or a script in 'bin'
 ]
-
-# If your script needs specific Nuke environments variables set, add them here.
-# For example, if it expects a custom Nuke plugin path:
-# env.NUKE_PATH.append('{root}/nuke/plugins')
-
-def commands():
-    # Add the 'python' subdirectory of this package to PYTHONPATH
-    # This makes 'import nuke_movie_generator' work
-    env.PYTHONPATH.append(os.path.join('{root}', 'python'))
-
-    # Optional: If you have a 'bin' directory with executable scripts
-    env.PATH.append(os.path.join('{root}', 'bin'))
-
-    # Set up an alias to run your script easily
-    # This assumes 'run_movie_generator.py' is in your 'bin' directory
-    # or you have a main entry point in your python package.
-    # Using 'command:' allows you to execute a Python script directly via Rez.
-    #alias('generate_movie', 'python -m nuke_movie_generator.generate_movie')
-    # Or, if you have a wrapper script in 'bin':
-    # alias('generate_movie', 'run_movie_generator.py')
-
 
 build_command = 'python {root}/build.py {install}'
 
