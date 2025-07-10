@@ -7,7 +7,7 @@ if __name__ == '__main__':
         source_path=os.environ['REZ_BUILD_SOURCE_PATH'],
         build_path=os.environ['REZ_BUILD_PATH'],
         install_path=os.environ['REZ_BUILD_INSTALL_PATH'],
-        directory_list=["python", "bin", "configs"]
+        directory_list=["python", "bin", "configs", "templates"]
     )
     pckg_builder.build()
 
