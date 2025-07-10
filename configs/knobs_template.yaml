@@ -1,0 +1,194 @@
+template:
+  Nodes:
+    colorspace:
+      - name: "--colorspace_in"
+        type: str
+        default: "RGB"
+        help: "Input colorspace."
+      - name: "--colorspace_out"
+        type: str
+        default: "sRGB"
+        help: "Output colorspace."
+    reformat:
+      - name: "--format"
+        type: str
+        default: "HD_1080"
+        help: "Format name."
+      - name: "--type"
+        type: str
+        help: "Box definition for reformat (e.g., 0 0 1920 1080)."
+      - name: "--filter"
+        type: str
+        help: "Reformat filter type."
+      - name: "--resize"
+        type: str
+        choices: ["fit", "fill", "crop", "none"]
+        default: "fit"
+        help: "Resize mode."
+      - name: "--black_outside"
+        action: "store_true"
+        help: "Black outside reformat area."
+      - name: "--clamp"
+        action: "store_false"
+        help: "Clamp outside reformat area."
+      - name: "--pbb"
+        action: "store_false"
+        help: "Preserve black borders."
+    write:
+      - name: "--file-type"
+        type: str
+        default: "mov"
+        help: "Output file type."
+      - name: "--mov64_codec"
+        type: str
+        default: "h264"
+        help: "MOV codec type."
+      - name: "--mov64_fps"
+        type: int
+        default: 24
+        help: "MOV frame rate."
+    slate:
+      - name: "--f_version_name"
+        type: str
+        default: "v1.0"
+        help: "Version name."
+      - name: "--f_submission_note"
+        type: str
+        default: "Daily submission"
+        help: "Submission note."
+      - name: "--f_submitting_for"
+        type: str
+        default: "Daily Review"
+        help: "Submitting for."
+      - name: "--f_shot_name"
+        type: str 
+        default: "Shot001"
+        help: "Shot name."
+      - name: "--f_shot_types"
+        type: str
+        default: "VFX"
+        help: "Shot types."
+      - name: "--f_vfx_scope_of_work"
+        type: str
+        default: "Compositing"
+        help: "VFX scope of work."
+      - name: "--f_show"
+        type: str
+        default: "MyShow"
+        help: "Show name."
+      - name: "--f_vendor"
+        type: str
+        default: "MyVendor"
+        help: "Vendor name."
+      - name: "--f_date"
+        type: str
+        default: "2023-10-01"
+        help: "Submission date."  
+      - name: "--f_frames_first"
+        type: float
+        default: 1.0
+        help: "First frame number." 
+      - name: "--f_frames_last"
+        type: float
+        help: "Last frame number." 
+      - name: "--f_frames_duration"
+        type: float
+        help: "Duration of frames." 
+      - name: "--f_media_color"
+        type: str
+        default: "Black"
+        help: "Media color."
+      - name: "--text"
+        type: str  
+        default: "Daily Review"
+        help: "Text to display." 
+      - name: "--f_shot_description"
+        type: str
+        default: "Description of the shot."
+        help: "Shot description." 
+      - name: "--f_episode"
+        type: str
+        default: "Episode 1"
+        help: "Episode name."
+      - name: "--f_scene"
+        type: str
+        default: "Scene 1"
+        help: "Scene name."
+      - name: "--f_sequence_name"
+        type: str
+        default: "Sequence 1"
+        help: "Sequence name."
+      - name: "--optional_fields_label"
+        type: str
+        default: "Optional Fields"
+        help: "Label for optional fields."
+      - name: "--f_opt1_key"
+        type: str
+        default: "Key1"
+        help: "Optional field 1 key." 
+      - name: "--f_opt1_value"
+        type: str
+        default: "Value1"
+        help: "Optional field 1 value."
+      - name: "--f_opt2_key"
+        type: str
+        default: "Key2"
+        help: "Optional field 2 key."
+      - name: "--f_opt2_value"
+        type: str
+        default: "Value2"
+        help: "Optional field 2 value."
+      - name: "--f_opt3_key"
+        type: str
+        default: "Key3"
+        help: "Optional field 3 key."
+      - name: "--f_opt3_value"
+        type: str
+        default: "Value3"
+        help: "Optional field 3 value."
+      - name: "--f_opt4_key"
+        type: str
+        default: "Key4"
+        help: "Optional field 4 key."
+      - name: "--f_opt4_value"
+        type: str
+        default: "Value4"
+        help: "Optional field 4 value."
+      - name: "--f_opt5_key"
+        type: str
+        default: "Key5"
+        help: "Optional field 5 key."
+      - name: "--f_opt5_value"
+        type: str
+        default: "Value5"
+      - name: "--f_opt6_key"
+        type: str
+        default: "Key6"
+        help: "Optional field 6 key."
+    burnin:
+      - name: "--burnin"
+        action: "store_true"
+        help: "Enable burn-in metadata."
+      - name: "--burnin_text_scale"
+        type: float
+        default: 0.5
+        help: "Scale of burn-in text."
+      - name: "--topleft"
+        type: str
+        help: "Top-left burn-in text."
+      - name: "--topcenter"
+        type: str
+        help: "Top-center burn-in text."
+      - name: "--topright"
+        type: str
+        help: "Top-right burn-in text."
+      - name: "--bottomleft"
+        type: str
+        help: "Bottom-left burn-in text."
+      - name: "--bottomcenter"
+        type: str
+        help: "Bottom-center burn-in text."
+      - name: "--bottomright"
+        type: str
+        help: "Bottom-right burn-in text."
+ 

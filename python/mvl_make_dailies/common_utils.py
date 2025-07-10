@@ -3,15 +3,103 @@ import os
 import logging
 import tempfile
 import re
+from enum import Enum
+
+from mvl_core_pipeline import rez_utils
+from mvl_core_pipeline.fig import Fig, YAMLConfigDriver
 from mvl_core_pipeline.logger import Logger
 
+
 logger = Logger(name='movie_generator', repo_name='rez-make-dailies').get_logger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 error_handler = logging.StreamHandler(sys.stderr)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(message)s')
 error_handler.setFormatter(formatter)
 logger.addHandler(error_handler)
+
+cfg = Fig('mvl_make_dailies', 'knobs_template', YAMLConfigDriver()) 
+
+class NukeTemplate(Enum):
+    MVL_VFX_TEMPLATE_SLATE_AND_BURNIN = "MVL_VFX_Template_Slate_Overlay_v0.0.1.nk"
+
+
+def writer_keys():
+    """
+    Returns a list of keys used for writer metadata in the Nuke template.
+    These keys are used to extract writer related arguments from the command line arguments.
+    """
+    return [
+        "file","file_type",
+        "mov64_codec", "mov64_fps", "first", "last"
+    ]   
+
+def reformat_keys():
+    """
+    Returns a list of keys used for reformat metadata in the Nuke template.
+    These keys are used to extract reformat related arguments from the command line arguments.
+    """
+    return [
+        "type", "format"
+    ]
+
+def colorspace_keys():
+    """
+    Returns a list of keys used for colorspace metadata in the Nuke template.
+    These keys are used to extract colorspace related arguments from the command line arguments.
+    These keys same as the knobs in the Nuke template.
+    """
+    return [
+        "colorspace_in", "colorspace_out"
+    ]
+
+def burn_in_keys():
+    """
+    Returns a list of keys used for burn-in metadata in the Nuke template.
+    These keys are used to extract burn-in related arguments from the command line arguments.
+    """
+    return [
+        "burnin", "burnIn_textScale", "topleft", "topcenter", "topright",
+        "bottomleft", "bottomcenter", "bottomright"
+    ]   
+
+def slate_keys():
+    """
+    Returns a list of keys used for slate metadata in the Nuke template.
+    These keys are used to extract slate related arguments from the command line arguments.
+    """
+    return [
+        "f_version_name", "f_submission_note", "f_submitting_for", "f_shot_name", "f_shot_types",
+        "f_vfx_scope_of_work", "f_show", "f_vendor", "f_date", "f_frames_first", "f_frames_last",
+        "f_frames_duration", "f_media_color", "text", "f_shot_description", "f_episode", "f_scene",
+        "f_sequence_name", "optional_fields_label", "f_opt1_key", "f_opt1_value", "f_opt2_key",
+        "f_opt2_value", "f_opt3_key", "f_opt3_value", "f_opt4_key", "f_opt4_value", "f_opt5_key",
+        "f_opt5_value", "f_opt6_key", "f_opt6_value"
+    ]
+
+def read_keys():   
+    """
+    Returns a list of keys used for read metadata in the Nuke template.
+    These keys are used to extract read related arguments from the command line arguments.
+    """
+    return [
+        "file"
+    ]
+
+def writer_args():
+    return cfg.get_config()['template']['Nodes']['write']
+
+def reformat_args():
+    return cfg.get_config()['template']['Nodes']['reformat']
+
+def colorspace_args():
+    return cfg.get_config()['template']['Nodes']['colorspace']
+ 
+def burnin_args():
+    return cfg.get_config()['template']['Nodes']['burnin']
+
+def slate_args():
+    return cfg.get_config()['template']['Nodes']['slate']
 
 def get_package_path()->str:
     """
@@ -22,7 +110,7 @@ def get_package_path()->str:
     Returns:
         str: The path to the mvl_make_dailies package directory.
     """
-    return os.environ.get('REZ_MVL_MAKE_DAILIES_ROOT', '')
+    return rez_utils.get_repo_root('mvl_make_dailies')
 
 def get_python_package_path()->str:
     """
@@ -36,7 +124,7 @@ def get_python_package_path()->str:
 
     # Get the base path for the package's Python modules to set in sys.path
     # This assumes REZ_mvl_make_dailies_ROOT is set by Rez
-    package_path = os.environ.get('REZ_MVL_MAKE_DAILIES_ROOT', '')
+    package_path = get_package_path()
     if package_path:
         package_python_path = os.path.join(package_path, 'python')
     else:
@@ -57,6 +145,16 @@ def get_config_path()->str:
     """
     return os.path.join(get_package_path(), 'configs')
 
+def get_nuke_template_path(template=NukeTemplate.MVL_VFX_TEMPLATE_SLATE_AND_BURNIN)->str:
+    """
+    Get the template path for the mvl_make_dailies package.
+    This function retrieves the path from the environment variable REZ_MVL_MAKE_DAILIES_ROOT,
+    which is set by Rez when the package is loaded.
+    If the environment variable is not set, it defaults to the current working directory.
+    Returns:
+        str: The normalized path to the mvl_make_dailies package's templates directory.
+    """
+    return os.path.join(get_package_path(), 'templates', "nuke", template.value)
 
 def get_nuke_executable_path()->str:
     """
@@ -77,7 +175,6 @@ def get_nuke_executable_path()->str:
     
     return os.path.normpath(nuke_executable_path)
 
-
 def gather_frame_range(sequence_path) -> range:
     """
     Collect the frame range from a file sequence path.
@@ -94,7 +191,6 @@ def gather_frame_range(sequence_path) -> range:
 
     frames = []
     if os.path.isdir(sequence_path):
-        
         files = sorted(os.listdir(sequence_path))
         for file in files:
             full_file_path = os.path.join(sequence_path, file)
@@ -131,7 +227,6 @@ def gather_frame_range(sequence_path) -> range:
     logger.info(f"Gathered frame range from {sequence_path}: {start} to {end}")
 
     return range(start, end ) 
-
 
 def is_valid_frame_range(start, stop):
     """
@@ -197,3 +292,53 @@ def is_valid_path(path):
     
     logger.error(f"Path does not exist: {path}")
     return False
+
+def enableHouModule():
+    """
+    Set up the environment so that "import hou" works.
+    """
+    import sys, os
+    
+    # Importing hou will load Houdini's libraries and initialize Houdini.
+    # This will cause Houdini to load any HDK extensions written in C++.
+    # These extensions need to link against Houdini's libraries,
+    # so the symbols from Houdini's libraries must be visible to other
+    # libraries that Houdini loads.  To make the symbols visible, we add the
+    # RTLD_GLOBAL dlopen flag.
+    if hasattr(sys, "setdlopenflags"):
+        old_dlopen_flags = sys.getdlopenflags()
+        sys.setdlopenflags(old_dlopen_flags | os.RTLD_GLOBAL)
+
+    python_version = sys.version_info
+    python_major_version = python_version.major
+    python_minor_version = python_version.minor    
+
+    houdini_root  = os.environ.get('REZ_HOUDINI_ROOT')
+    if not houdini_root:
+        logger.error("houdini installation not found! make sure to rub rez-env houdini mvl_make_dailies")
+        sys.exit(1)
+    
+    houdini_version = houdini_root.replace("\\", "/").split("/")[-1]
+    vrn = str(houdini_version)[:-3]
+    sidefx_root = f"C:\\Program Files\\Side Effects Software\\Houdini {vrn}"
+    houdini_python_module_path = os.path.join(sidefx_root,"houdini",f"python{python_major_version}.{python_minor_version}libs")
+
+    logger.info(f"houdini python module path : {houdini_python_module_path}")
+  
+    if sys.platform == "win32" and hasattr(os, "add_dll_directory"):
+        os.add_dll_directory(os.path.join(sidefx_root, "bin"))
+
+    try:
+        import hou
+    except ModuleNotFoundError:
+        # If the hou module could not be imported, then add 
+        # $HFS/houdini/pythonX.Ylibs to sys.path so Python can locate the
+        # hou module.
+        sys.path.append(os.path.join(sidefx_root, "bin"))
+        sys.path.append(houdini_python_module_path)
+        
+        import hou
+    finally:
+        # Reset dlopen flags back to their original value.
+        if hasattr(sys, "setdlopenflags"):
+            sys.setdlopenflags(old_dlopen_flags)
