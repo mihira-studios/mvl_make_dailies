@@ -23,16 +23,16 @@ template:
       - name: "--resize"
         type: str
         choices: ["fit", "fill", "crop", "none"]
-        default: "fit"
+        default: "none"
         help: "Resize mode."
       - name: "--black_outside"
-        action: "store_true"
+        default: True
         help: "Black outside reformat area."
       - name: "--clamp"
-        action: "store_false"
+        default: False
         help: "Clamp outside reformat area."
       - name: "--pbb"
-        action: "store_false"
+        default: False
         help: "Preserve black borders."
     write:
       - name: "--file-type"
@@ -48,6 +48,10 @@ template:
         default: 24
         help: "MOV frame rate."
     slate:
+      - name: "--no-slate"
+        action: "store_false"
+        dest: "slate"
+        help: "Disable writing slate metadata."
       - name: "--f_version_name"
         type: str
         default: "v1.0"
@@ -86,7 +90,7 @@ template:
         help: "Submission date."  
       - name: "--f_frames_first"
         type: float
-        default: 1.0
+        default: 1000
         help: "First frame number." 
       - name: "--f_frames_last"
         type: float
@@ -166,9 +170,10 @@ template:
         default: "Key6"
         help: "Optional field 6 key."
     burnin:
-      - name: "--burnin"
-        action: "store_true"
-        help: "Enable burn-in metadata."
+      - name: "--no-burnin"
+        action: "store_false"
+        dest: "burnin"
+        help: "Disable burin metadata."
       - name: "--burnin_text_scale"
         type: float
         default: 0.5
@@ -191,4 +196,13 @@ template:
       - name: "--bottomright"
         type: str
         help: "Bottom-right burn-in text."
+      - name: "--burnIn_color"
+        type: float
+        default: 0.8
+        help: "burn in text color"
+      - name: "--burnIn_opacity"
+        type: float
+        default: 1.0
+        help: "burn in text color"
+
  

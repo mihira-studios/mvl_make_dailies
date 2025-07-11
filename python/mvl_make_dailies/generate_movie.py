@@ -67,7 +67,7 @@ def main(argv=None):
 
     args = parser.parse_args(argv)
     if args.app_mode in APP_MODE_COMMANDS:
-        APP_MODE_COMMANDS[args.app_mode](args)
+        APP_MODE_COMMANDS[args.app_mode](vars(args))
     else:
         raise ValueError(f"Unknown app_mode: {args.app_mode}")
 

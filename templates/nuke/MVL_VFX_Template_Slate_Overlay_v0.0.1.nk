@@ -78,15 +78,15 @@ Colorspace {
  xpos -1140
  ypos -322
 }
-set Nc4dcc000 [stack 0]
+set N30e3aa00 [stack 0]
 Group {
  name NETFLIX_TEMPLATE_SLATE
  onCreate "node = nuke.thisNode()\nif node\['autofont'].getValue():\n    platform = sys.platform.rstrip('0123456789')\n    if platform in \['darwin','win','linux']:\n        node\[\"font\"].setValue(node\[\"font_\" + platform].getValue())\n        node\[\"font_bold\"].setValue(node\[\"font_bold_\" + platform].getValue())"
  tile_color 0xad0000ff
  note_font_color 0xff
+ selected true
  xpos -1140
  ypos -255
- show_group_view true
  addUserKnob {20 fields l Fields t "All Of the value inputs to the slate."}
  addUserKnob {1 f_version_name l "Version Name" t "This field is to be filled out with the unique version string for this media and match the name of the file.\n\nFollow the show's naming guidelines when filling this field out.\n\nExtension and frame padding are not required on this field.\n\nex. \"abc_001_001_comp_v003\"\n��"}
  f_version_name version_number
@@ -497,7 +497,7 @@ Group {
   xpos 3150
   ypos 1574
  }
-set Nc4da9b00 [stack 0]
+set N30e3fb00 [stack 0]
  Dot {
   name Dot7
   xpos 2304
@@ -508,7 +508,7 @@ set Nc4da9b00 [stack 0]
   xpos 2304
   ypos 3858
  }
-set Nc4dbd000 [stack 0]
+set N30e5b000 [stack 0]
  Group {
   inputs 0
   name slate_field14
@@ -715,7 +715,7 @@ set Nc4dbd000 [stack 0]
    xpos -776
    ypos 330
   }
-set Nc1716000 [stack 0]
+set N30140000 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -783,7 +783,7 @@ set Nc1716000 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc173c500 [stack 0]
+set N30160f00 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -896,7 +896,7 @@ set Nc173c500 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc173c500
+push $N30160f00
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -904,7 +904,7 @@ push $Nc173c500
    xpos -1140
    ypos 447
   }
-set Nc173d900 [stack 0]
+set N30162300 [stack 0]
   Text {
    cliptype none
    replace true
@@ -927,7 +927,7 @@ set Nc173d900 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc173d900
+push $N30162300
   Merge2 {
    inputs 2
    bbox B
@@ -1034,7 +1034,7 @@ push $Nc173d900
    xpos -1140
    ypos 705
   }
-push $Nc1716000
+push $N30140000
   Merge2 {
    inputs 2
    name Merge4
@@ -1264,7 +1264,7 @@ push $Nc1716000
    xpos -776
    ypos 330
   }
-set Nc17f6400 [stack 0]
+set N3021a400 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -1332,7 +1332,7 @@ set Nc17f6400 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1807e00 [stack 0]
+set N30220800 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -1447,7 +1447,7 @@ set Nc1807e00 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1807e00
+push $N30220800
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -1455,7 +1455,7 @@ push $Nc1807e00
    xpos -1140
    ypos 447
   }
-set Nc1809200 [stack 0]
+set N30276000 [stack 0]
   Text {
    cliptype none
    replace true
@@ -1478,7 +1478,7 @@ set Nc1809200 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1809200
+push $N30276000
   Merge2 {
    inputs 2
    bbox B
@@ -1586,7 +1586,7 @@ push $Nc1809200
    xpos -1140
    ypos 705
   }
-push $Nc17f6400
+push $N3021a400
   Merge2 {
    inputs 2
    name Merge4
@@ -1815,7 +1815,7 @@ push $Nc17f6400
    xpos -776
    ypos 330
   }
-set Nc18a4800 [stack 0]
+set N302d2800 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -1883,7 +1883,7 @@ set Nc18a4800 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc18c7700 [stack 0]
+set N3032c500 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -1998,7 +1998,7 @@ set Nc18c7700 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc18c7700
+push $N3032c500
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -2006,7 +2006,7 @@ push $Nc18c7700
    xpos -1140
    ypos 447
   }
-set Nc190cf00 [stack 0]
+set N3032d900 [stack 0]
   Text {
    cliptype none
    replace true
@@ -2029,7 +2029,7 @@ set Nc190cf00 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc190cf00
+push $N3032d900
   Merge2 {
    inputs 2
    bbox B
@@ -2137,7 +2137,7 @@ push $Nc190cf00
    xpos -1140
    ypos 705
   }
-push $Nc18a4800
+push $N302d2800
   Merge2 {
    inputs 2
    name Merge4
@@ -2366,7 +2366,7 @@ push $Nc18a4800
    xpos -776
    ypos 330
   }
-set Nc193ec00 [stack 0]
+set N30368c00 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -2434,7 +2434,7 @@ set Nc193ec00 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc19d1400 [stack 0]
+set N303fbe00 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -2549,7 +2549,7 @@ set Nc19d1400 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc19d1400
+push $N303fbe00
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -2557,7 +2557,7 @@ push $Nc19d1400
    xpos -1140
    ypos 447
   }
-set Nc19d2800 [stack 0]
+set N303fd200 [stack 0]
   Text {
    cliptype none
    replace true
@@ -2580,7 +2580,7 @@ set Nc19d2800 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc19d2800
+push $N303fd200
   Merge2 {
    inputs 2
    bbox B
@@ -2688,7 +2688,7 @@ push $Nc19d2800
    xpos -1140
    ypos 705
   }
-push $Nc193ec00
+push $N30368c00
   Merge2 {
    inputs 2
    name Merge4
@@ -2917,7 +2917,7 @@ push $Nc193ec00
    xpos -776
    ypos 330
   }
-set Nc1a13000 [stack 0]
+set N3043f000 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -2985,7 +2985,7 @@ set Nc1a13000 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1a8ed00 [stack 0]
+set N304ab700 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -3100,7 +3100,7 @@ set Nc1a8ed00 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1a8ed00
+push $N304ab700
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -3108,7 +3108,7 @@ push $Nc1a8ed00
    xpos -1140
    ypos 447
   }
-set Nc1ade500 [stack 0]
+set N304f8f00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -3131,7 +3131,7 @@ set Nc1ade500 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1ade500
+push $N304f8f00
   Merge2 {
    inputs 2
    bbox B
@@ -3239,7 +3239,7 @@ push $Nc1ade500
    xpos -1140
    ypos 705
   }
-push $Nc1a13000
+push $N3043f000
   Merge2 {
    inputs 2
    name Merge4
@@ -3468,7 +3468,7 @@ push $Nc1a13000
    xpos -776
    ypos 330
   }
-set Nc1aeb400 [stack 0]
+set N30519400 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -3536,7 +3536,7 @@ set Nc1aeb400 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1b92a00 [stack 0]
+set N305bd400 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -3651,7 +3651,7 @@ set Nc1b92a00 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1b92a00
+push $N305bd400
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -3659,7 +3659,7 @@ push $Nc1b92a00
    xpos -1140
    ypos 447
   }
-set Nc1b93e00 [stack 0]
+set N305be800 [stack 0]
   Text {
    cliptype none
    replace true
@@ -3682,7 +3682,7 @@ set Nc1b93e00 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1b93e00
+push $N305be800
   Merge2 {
    inputs 2
    bbox B
@@ -3790,7 +3790,7 @@ push $Nc1b93e00
    xpos -1140
    ypos 705
   }
-push $Nc1aeb400
+push $N30519400
   Merge2 {
    inputs 2
    name Merge4
@@ -4019,7 +4019,7 @@ push $Nc1aeb400
    xpos -776
    ypos 330
   }
-set Nc1b99800 [stack 0]
+set N305c9800 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -4087,7 +4087,7 @@ set Nc1b99800 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1c66300 [stack 0]
+set N86096d00 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -4202,7 +4202,7 @@ set Nc1c66300 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1c66300
+push $N86096d00
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -4210,7 +4210,7 @@ push $Nc1c66300
    xpos -1140
    ypos 447
   }
-set Nc1c67700 [stack 0]
+set N860f0500 [stack 0]
   Text {
    cliptype none
    replace true
@@ -4233,7 +4233,7 @@ set Nc1c67700 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1c67700
+push $N860f0500
   Merge2 {
    inputs 2
    bbox B
@@ -4341,7 +4341,7 @@ push $Nc1c67700
    xpos -1140
    ypos 705
   }
-push $Nc1b99800
+push $N305c9800
   Merge2 {
    inputs 2
    name Merge4
@@ -4570,7 +4570,7 @@ push $Nc1b99800
    xpos -776
    ypos 330
   }
-set Nc1c6fc00 [stack 0]
+set N860bdc00 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -4638,7 +4638,7 @@ set Nc1c6fc00 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1d6e000 [stack 0]
+set N861aaa00 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -4753,7 +4753,7 @@ set Nc1d6e000 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1d6e000
+push $N861aaa00
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -4761,7 +4761,7 @@ push $Nc1d6e000
    xpos -1140
    ypos 447
   }
-set Nc1d6f400 [stack 0]
+set N861abe00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -4784,7 +4784,7 @@ set Nc1d6f400 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1d6f400
+push $N861abe00
   Merge2 {
    inputs 2
    bbox B
@@ -4892,7 +4892,7 @@ push $Nc1d6f400
    xpos -1140
    ypos 705
   }
-push $Nc1c6fc00
+push $N860bdc00
   Merge2 {
    inputs 2
    name Merge4
@@ -5121,7 +5121,7 @@ push $Nc1c6fc00
    xpos -776
    ypos 330
   }
-set Nc1e22000 [stack 0]
+set N86266000 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -5189,7 +5189,7 @@ set Nc1e22000 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1e35900 [stack 0]
+set N8627a300 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -5304,7 +5304,7 @@ set Nc1e35900 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1e35900
+push $N8627a300
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -5312,7 +5312,7 @@ push $Nc1e35900
    xpos -1140
    ypos 447
   }
-set Nc1e36d00 [stack 0]
+set N8627b700 [stack 0]
   Text {
    cliptype none
    replace true
@@ -5335,7 +5335,7 @@ set Nc1e36d00 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1e36d00
+push $N8627b700
   Merge2 {
    inputs 2
    bbox B
@@ -5443,7 +5443,7 @@ push $Nc1e36d00
    xpos -1140
    ypos 705
   }
-push $Nc1e22000
+push $N86266000
   Merge2 {
    inputs 2
    name Merge4
@@ -5672,7 +5672,7 @@ push $Nc1e22000
    xpos -776
    ypos 330
   }
-set Nc1efe400 [stack 0]
+set N86348400 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -5740,7 +5740,7 @@ set Nc1efe400 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1eef200 [stack 0]
+set N8637c000 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -5855,7 +5855,7 @@ set Nc1eef200 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1eef200
+push $N8637c000
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -5863,7 +5863,7 @@ push $Nc1eef200
    xpos -1140
    ypos 447
   }
-set Nc1f42a00 [stack 0]
+set N8637d400 [stack 0]
   Text {
    cliptype none
    replace true
@@ -5886,7 +5886,7 @@ set Nc1f42a00 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1f42a00
+push $N8637d400
   Merge2 {
    inputs 2
    bbox B
@@ -5994,7 +5994,7 @@ push $Nc1f42a00
    xpos -1140
    ypos 705
   }
-push $Nc1efe400
+push $N86348400
   Merge2 {
    inputs 2
    name Merge4
@@ -6227,7 +6227,7 @@ push $Nc1efe400
    xpos -776
    ypos 330
   }
-set Nc1fb4800 [stack 0]
+set N863fe800 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -6295,7 +6295,7 @@ set Nc1fb4800 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc1ffcf00 [stack 0]
+set N86441900 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -6412,7 +6412,7 @@ set Nc1ffcf00 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc1ffcf00
+push $N86441900
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -6420,7 +6420,7 @@ push $Nc1ffcf00
    xpos -1140
    ypos 447
   }
-set Nc1ffe300 [stack 0]
+set N86442d00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -6443,7 +6443,7 @@ set Nc1ffe300 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc1ffe300
+push $N86442d00
   Merge2 {
    inputs 2
    bbox B
@@ -6552,7 +6552,7 @@ push $Nc1ffe300
    xpos -1140
    ypos 705
   }
-push $Nc1fb4800
+push $N863fe800
   Merge2 {
    inputs 2
    name Merge4
@@ -6786,7 +6786,7 @@ push $Nc1fb4800
    xpos -776
    ypos 330
   }
-set Nc204ac00 [stack 0]
+set N86494c00 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -6854,7 +6854,7 @@ set Nc204ac00 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc20ca800 [stack 0]
+set N864fd200 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -6971,7 +6971,7 @@ set Nc20ca800 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc20ca800
+push $N864fd200
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -6979,7 +6979,7 @@ push $Nc20ca800
    xpos -1140
    ypos 447
   }
-set Nc2118000 [stack 0]
+set N8654ea00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -7002,7 +7002,7 @@ set Nc2118000 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc2118000
+push $N8654ea00
   Merge2 {
    inputs 2
    bbox B
@@ -7111,7 +7111,7 @@ push $Nc2118000
    xpos -1140
    ypos 705
   }
-push $Nc204ac00
+push $N86494c00
   Merge2 {
    inputs 2
    name Merge4
@@ -7345,7 +7345,7 @@ push $Nc204ac00
    xpos -776
    ypos 330
   }
-set Nc2123000 [stack 0]
+set N8656b000 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -7413,7 +7413,7 @@ set Nc2123000 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc21c8500 [stack 0]
+set N8660cf00 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -7530,7 +7530,7 @@ set Nc21c8500 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc21c8500
+push $N8660cf00
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -7538,7 +7538,7 @@ push $Nc21c8500
    xpos -1140
    ypos 447
   }
-set Nc21c9900 [stack 0]
+set N8660e300 [stack 0]
   Text {
    cliptype none
    replace true
@@ -7561,7 +7561,7 @@ set Nc21c9900 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc21c9900
+push $N8660e300
   Merge2 {
    inputs 2
    bbox B
@@ -7670,7 +7670,7 @@ push $Nc21c9900
    xpos -1140
    ypos 705
   }
-push $Nc2123000
+push $N8656b000
   Merge2 {
    inputs 2
    name Merge4
@@ -7995,7 +7995,7 @@ push $Nc2123000
    xpos -776
    ypos 330
   }
-set Nc22ca000 [stack 0]
+set N876d4000 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -8063,7 +8063,7 @@ set Nc22ca000 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc22b1700 [stack 0]
+set N876f8500 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -8178,7 +8178,7 @@ set Nc22b1700 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc22b1700
+push $N876f8500
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -8186,7 +8186,7 @@ push $Nc22b1700
    xpos -1140
    ypos 447
   }
-set Nc2306f00 [stack 0]
+set N876f9900 [stack 0]
   Text {
    cliptype none
    replace true
@@ -8209,7 +8209,7 @@ set Nc2306f00 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc2306f00
+push $N876f9900
   Merge2 {
    inputs 2
    bbox B
@@ -8317,7 +8317,7 @@ push $Nc2306f00
    xpos -1140
    ypos 705
   }
-push $Nc22ca000
+push $N876d4000
   Merge2 {
    inputs 2
    name Merge4
@@ -8551,7 +8551,7 @@ push $Nc22ca000
    xpos -776
    ypos 330
   }
-set Nc23a6400 [stack 0]
+set N877b4400 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -8620,7 +8620,7 @@ set Nc23a6400 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc23c1400 [stack 0]
+set N877c9e00 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -8737,7 +8737,7 @@ set Nc23c1400 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc23c1400
+push $N877c9e00
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -8745,7 +8745,7 @@ push $Nc23c1400
    xpos -1140
    ypos 447
   }
-set Nc23c2800 [stack 0]
+set N877cb200 [stack 0]
   Text {
    cliptype none
    replace true
@@ -8768,7 +8768,7 @@ set Nc23c2800 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc23c2800
+push $N877cb200
   Merge2 {
    inputs 2
    bbox B
@@ -8877,7 +8877,7 @@ push $Nc23c2800
    xpos -1140
    ypos 705
   }
-push $Nc23a6400
+push $N877b4400
   Merge2 {
    inputs 2
    name Merge4
@@ -9123,7 +9123,7 @@ push $Nc23a6400
    xpos -776
    ypos 330
   }
-set Nc245a800 [stack 0]
+set N87866800 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -9191,7 +9191,7 @@ set Nc245a800 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc2487700 [stack 0]
+set N878ca500 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -9306,7 +9306,7 @@ set Nc2487700 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc2487700
+push $N878ca500
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -9314,7 +9314,7 @@ push $Nc2487700
    xpos -1140
    ypos 447
   }
-set Nc24d2f00 [stack 0]
+set N878cb900 [stack 0]
   Text {
    cliptype none
    replace true
@@ -9337,7 +9337,7 @@ set Nc24d2f00 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc24d2f00
+push $N878cb900
   Merge2 {
    inputs 2
    bbox B
@@ -9445,7 +9445,7 @@ push $Nc24d2f00
    xpos -1140
    ypos 705
   }
-push $Nc245a800
+push $N87866800
   Merge2 {
    inputs 2
    name Merge4
@@ -9663,7 +9663,7 @@ push $Nc245a800
    xpos -776
    ypos 330
   }
-set Nc2504c00 [stack 0]
+set N87912c00 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -9731,7 +9731,7 @@ set Nc2504c00 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set Nc2596f00 [stack 0]
+set N8798f900 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -9844,7 +9844,7 @@ set Nc2596f00 [stack 0]
    xpos -886
    ypos 564
   }
-push $Nc2596f00
+push $N8798f900
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -9852,7 +9852,7 @@ push $Nc2596f00
    xpos -1140
    ypos 447
   }
-set Nc2598300 [stack 0]
+set N87990d00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -9875,7 +9875,7 @@ set Nc2598300 [stack 0]
    xpos -1216
    ypos 493
   }
-push $Nc2598300
+push $N87990d00
   Merge2 {
    inputs 2
    bbox B
@@ -9982,7 +9982,7 @@ push $Nc2598300
    xpos -1140
    ypos 705
   }
-push $Nc2504c00
+push $N87912c00
   Merge2 {
    inputs 2
    name Merge4
@@ -10207,7 +10207,7 @@ push $Nc2504c00
    xpos -776
    ypos 330
   }
-set N1dd3000 [stack 0]
+set N879d5000 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -10275,7 +10275,7 @@ set N1dd3000 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set N1e60800 [stack 0]
+set N87a53200 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -10388,7 +10388,7 @@ set N1e60800 [stack 0]
    xpos -886
    ypos 564
   }
-push $N1e60800
+push $N87a53200
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -10396,7 +10396,7 @@ push $N1e60800
    xpos -1140
    ypos 447
   }
-set N1eae000 [stack 0]
+set N87aa0a00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -10419,7 +10419,7 @@ set N1eae000 [stack 0]
    xpos -1216
    ypos 493
   }
-push $N1eae000
+push $N87aa0a00
   Merge2 {
    inputs 2
    bbox B
@@ -10427,7 +10427,7 @@ push $N1eae000
    xpos -1140
    ypos 490
   }
-set N1eaf400 [stack 0]
+set N87aa1e00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -10450,7 +10450,7 @@ set N1eaf400 [stack 0]
    xpos -1216
    ypos 514
   }
-push $N1eaf400
+push $N87aa1e00
   Merge2 {
    inputs 2
    bbox B
@@ -10557,7 +10557,7 @@ push $N1eaf400
    xpos -1140
    ypos 705
   }
-push $N1dd3000
+push $N879d5000
   Merge2 {
    inputs 2
    name Merge4
@@ -10782,7 +10782,7 @@ push $N1dd3000
    xpos -776
    ypos 330
   }
-set N1eadc00 [stack 0]
+set N87ab3c00 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -10850,7 +10850,7 @@ set N1eadc00 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set N1f65900 [stack 0]
+set N87b64300 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -10963,7 +10963,7 @@ set N1f65900 [stack 0]
    xpos -886
    ypos 599
   }
-push $N1f65900
+push $N87b64300
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -10971,7 +10971,7 @@ push $N1f65900
    xpos -1140
    ypos 486
   }
-set N1f66d00 [stack 0]
+set N87b65700 [stack 0]
   Text {
    cliptype none
    replace true
@@ -10994,7 +10994,7 @@ set N1f66d00 [stack 0]
    xpos -1216
    ypos 532
   }
-push $N1f66d00
+push $N87b65700
   Merge2 {
    inputs 2
    bbox B
@@ -11101,7 +11101,7 @@ push $N1f66d00
    xpos -1140
    ypos 740
   }
-push $N1eadc00
+push $N87ab3c00
   Merge2 {
    inputs 2
    name Merge4
@@ -11327,7 +11327,7 @@ push $N1eadc00
    xpos -776
    ypos 330
   }
-set N2030000 [stack 0]
+set N87c3a000 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -11395,7 +11395,7 @@ set N2030000 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set N2021200 [stack 0]
+set N87c6e000 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -11508,7 +11508,7 @@ set N2021200 [stack 0]
    xpos -886
    ypos 564
   }
-push $N2021200
+push $N87c6e000
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -11516,7 +11516,7 @@ push $N2021200
    xpos -1140
    ypos 447
   }
-set N2070a00 [stack 0]
+set N87c6f400 [stack 0]
   Text {
    cliptype none
    replace true
@@ -11539,7 +11539,7 @@ set N2070a00 [stack 0]
    xpos -1216
    ypos 493
   }
-push $N2070a00
+push $N87c6f400
   Merge2 {
    inputs 2
    bbox B
@@ -11646,7 +11646,7 @@ push $N2070a00
    xpos -1140
    ypos 705
   }
-push $N2030000
+push $N87c3a000
   Merge2 {
    inputs 2
    name Merge4
@@ -11868,7 +11868,7 @@ push $N2030000
    xpos -776
    ypos 330
   }
-set N210c400 [stack 0]
+set N87d18400 [stack 0]
   Crop {
    box {{"Last_Text.bbox.x + parent.outline_size.x +1"} {"Last_Text.bbox.y + parent.outline_size.y + 1"} {"Last_Text.bbox.r - parent.outline_size.x -1"} {"Last_Text.bbox.y + parent.outline_size.y+ 2"}}
    crop false
@@ -11936,7 +11936,7 @@ set N210c400 [stack 0]
    addUserKnob {3 output_lines l "output lines" t "how many lines to crop to based on input lines, max lines, and the render full height setting."}
    output_lines {{"parent.render_full_height?max_lines:min(used_lines, max_lines)"}}
   }
-set N2132f00 [stack 0]
+set N87d2d900 [stack 0]
   MergeExpression {
    inputs 2
    expr0 Ar==auto_color_a.r?auto_color_b.r:auto_color_a.r
@@ -12047,7 +12047,7 @@ set N2132f00 [stack 0]
    xpos -886
    ypos 564
   }
-push $N2132f00
+push $N87d2d900
   Crop {
    box {{"input0.bbox.x - parent.border.x * parent.field_scale"} {"input0.bbox.y - parent.border.y * parent.field_scale"} {"input0.bbox.r + parent.border.r * parent.field_scale"} {"input0.bbox.t + parent.border.t * parent.field_scale"}}
    crop false
@@ -12055,7 +12055,7 @@ push $N2132f00
    xpos -1140
    ypos 447
   }
-set N2134300 [stack 0]
+set N87d2ed00 [stack 0]
   Text {
    cliptype none
    replace true
@@ -12078,7 +12078,7 @@ set N2134300 [stack 0]
    xpos -1216
    ypos 493
   }
-push $N2134300
+push $N87d2ed00
   Merge2 {
    inputs 2
    bbox B
@@ -12184,7 +12184,7 @@ push $N2134300
    xpos -1140
    ypos 705
   }
-push $N210c400
+push $N87d18400
   Merge2 {
    inputs 2
    name Merge4
@@ -12258,7 +12258,7 @@ push $N210c400
   xpos 3370
   ypos 2030
  }
-push $Nc4da9b00
+push $N30e3fb00
  Dot {
   name Dot2
   xpos 3294
@@ -12363,13 +12363,13 @@ push $Nc4da9b00
   xpos 2160
   ypos 1118
  }
-set N21e8800 [stack 0]
+set N87de7200 [stack 0]
  Dot {
   name Dot12
   xpos 2194
   ypos 1266
  }
-set N21c1800 [stack 0]
+set N87dcb800 [stack 0]
  Dot {
   name Dot13
   xpos 2304
@@ -12434,7 +12434,7 @@ set N21c1800 [stack 0]
   addUserKnob {6 color_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
   addUserKnob {6 color_rgb_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
  }
-push $N21e8800
+push $N87de7200
  Crop {
   preset 2.35:1
   box {{parent.use_input_for_crop?Slate_Format.box.x:parent.final_picture_crop.x x40 624 0 0 234 x45 0} {parent.use_input_for_crop?Slate_Format.box.y:parent.final_picture_crop.y x40 0 0 604 0 x45 0} {parent.use_input_for_crop?Slate_Format.box.r:parent.final_picture_crop.r x40 3532 4096 4096 3840 1280 1280} {parent.use_input_for_crop?Slate_Format.box.t:parent.final_picture_crop.t x40 2160 2160 1570 2160 420 720}}
@@ -12451,7 +12451,7 @@ push $N21e8800
   xpos 1974
   ypos 1338
  }
-push $N21c1800
+push $N87dcb800
  Grade {
   inputs 1+1
   multiply 0.5
@@ -12520,28 +12520,29 @@ push $N21c1800
   xpos 2160
   ypos 3884
  }
-push $Nc4dbd000
+push $N30e5b000
  Dot {
   name Dot9
   xpos 2304
   ypos 3930
  }
-set Nc4dbd400 [stack 0]
  Switch {
   inputs 2
-  which {{"frame == parent.active_frame || parent.active_all_frames" x1001 1 1}}
-  name Switch1
+  which {{frame 1001 0 1}}
+  name MVL_SWITCH
   xpos 2160
   ypos 3926
+  lifetimeStart 1000
+  lifetimeEnd 1000
+  useLifetime true
  }
-push $Nc4dbd400
  Output {
   name Output
-  xpos 2270
-  ypos 3974
+  xpos 2160
+  ypos 3990
  }
 end_group
-push $Nc4dcc000
+push $N30e3aa00
 Group {
  name Netflix_MEI_Overlay
  help "Applies a text burn-in to the media.\n\nUp to 6 pieces of metadata can be added to the shot"
@@ -12566,7 +12567,7 @@ Group {
  burnIn_textScale 0.5
  addUserKnob {26 ""}
  addUserKnob {1 topleft l Vendor}
- topleft VENDOT
+ topleft VENDOR
  addUserKnob {1 topcenter l "Show Code"}
  topcenter "SHOW CODE"
  addUserKnob {1 topright l Date}
@@ -12608,7 +12609,7 @@ Group {
   opacity {{parent.burnIn_opacity}}
   message "\[value parent.topleft]"
   old_message {
-   {86 69 78 68 79 84}
+   {86 69 78 68 79 82}
   }
   old_expression_markers {
    {0 5}
@@ -12701,7 +12702,7 @@ Group {
   opacity {{parent.burnIn_opacity}}
   message "\[value parent.topright]"
   old_message {
-   {50 48 50 53 45 48 55 45 48 57}
+   {50 48 50 53 45 48 55 45 49 49}
   }
   old_expression_markers {
    {0 9}

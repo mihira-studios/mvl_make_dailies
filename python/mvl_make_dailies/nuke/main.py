@@ -77,7 +77,7 @@ def generate_movie(
     first, last = [int(x) for x in ranges.split('-')]
 
     nuke.scriptClear()
-    nuke.root()['first_frame'].setValue(first - 1)
+    nuke.root()['first_frame'].setValue(first)
     nuke.root()['last_frame'].setValue(last)
     nuke.root()['format'].setValue(mvl_format) 
     
@@ -95,6 +95,16 @@ def generate_movie(
     apply_knob_values('MVL_READ', {'file': sequence_path_nomalized}, logger)
     apply_knob_values('NETFLIX_TEMPLATE_SLATE', slate_data, logger)
     apply_knob_values('Netflix_MEI_Overlay', overlay_data, logger)
+
+    if overlay_data.get('burnin') is False:
+        # Optionally disable the node
+        node = nuke.toNode("Netflix_MEI_Overlay")
+        if node:
+            node['disable'].setValue(True)
+            logger.info("Disabled Netflix_MEI_Overlay due to --no-burnin")
+        
+    
+        
 
     output_dir = os.path.dirname(output_mov_path_nomalized)
     if not os.path.exists(output_dir): 
@@ -138,7 +148,7 @@ def main():
     write_data = json.loads(args.write) if args.write else None
 
     try:
-        scriptPath = generate_movie(
+        generate_movie(
             file_in_path= file_in,
             file_out_path= file_out,
             slate_data=slate_data,

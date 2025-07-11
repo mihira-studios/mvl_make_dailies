@@ -18,30 +18,27 @@ formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(messag
 error_handler.setFormatter(formatter)
 logger.addHandler(error_handler)
 
-cfg = Fig('mvl_make_dailies', 'knobs_template', YAMLConfigDriver()) 
-
+cfg = Fig('mvl_make_dailies', 'knobs_template', YAMLConfigDriver())
 class NukeTemplate(Enum):
     MVL_VFX_TEMPLATE_SLATE_AND_BURNIN = "MVL_VFX_Template_Slate_Overlay_v0.0.1.nk"
 
+def getNodeAtrribs(list_of_dicts)->list:
+    attr = [d["name"].replace("--", "").replace('no-', "") for d in list_of_dicts if "name" in d]
+    return attr
 
 def writer_keys():
     """
     Returns a list of keys used for writer metadata in the Nuke template.
     These keys are used to extract writer related arguments from the command line arguments.
     """
-    return [
-        "file","file_type",
-        "mov64_codec", "mov64_fps", "first", "last"
-    ]   
+    return getNodeAtrribs(cfg.get_config()['template']['Nodes']['write'])
 
 def reformat_keys():
     """
     Returns a list of keys used for reformat metadata in the Nuke template.
     These keys are used to extract reformat related arguments from the command line arguments.
     """
-    return [
-        "type", "format"
-    ]
+    return getNodeAtrribs(cfg.get_config()['template']['Nodes']['reformat'])
 
 def colorspace_keys():
     """
@@ -49,33 +46,23 @@ def colorspace_keys():
     These keys are used to extract colorspace related arguments from the command line arguments.
     These keys same as the knobs in the Nuke template.
     """
-    return [
-        "colorspace_in", "colorspace_out"
-    ]
+    return getNodeAtrribs(cfg.get_config()['template']['Nodes']['colorspace'])
 
 def burn_in_keys():
     """
     Returns a list of keys used for burn-in metadata in the Nuke template.
     These keys are used to extract burn-in related arguments from the command line arguments.
     """
-    return [
-        "burnin", "burnIn_textScale", "topleft", "topcenter", "topright",
-        "bottomleft", "bottomcenter", "bottomright"
-    ]   
+
+    #return (cfg.get_config()['template']['Nodes']['burnin']).keys()
+    return getNodeAtrribs(cfg.get_config()['template']['Nodes']['burnin'])
 
 def slate_keys():
     """
     Returns a list of keys used for slate metadata in the Nuke template.
     These keys are used to extract slate related arguments from the command line arguments.
     """
-    return [
-        "f_version_name", "f_submission_note", "f_submitting_for", "f_shot_name", "f_shot_types",
-        "f_vfx_scope_of_work", "f_show", "f_vendor", "f_date", "f_frames_first", "f_frames_last",
-        "f_frames_duration", "f_media_color", "text", "f_shot_description", "f_episode", "f_scene",
-        "f_sequence_name", "optional_fields_label", "f_opt1_key", "f_opt1_value", "f_opt2_key",
-        "f_opt2_value", "f_opt3_key", "f_opt3_value", "f_opt4_key", "f_opt4_value", "f_opt5_key",
-        "f_opt5_value", "f_opt6_key", "f_opt6_value"
-    ]
+    return getNodeAtrribs(cfg.get_config()['template']['Nodes']['slate'])
 
 def read_keys():   
     """
@@ -96,6 +83,7 @@ def colorspace_args():
     return cfg.get_config()['template']['Nodes']['colorspace']
  
 def burnin_args():
+
     return cfg.get_config()['template']['Nodes']['burnin']
 
 def slate_args():
