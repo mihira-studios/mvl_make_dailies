@@ -34,4 +34,14 @@ Command : "daily"
 
 Usage example:
 
-make_movie daily --input "<sourcedir>/GEN63_SC_48_SH_0160__main_plate_v001_camA_takeA_f4448x3096_####.exr" --output "<destdir>/GEN63_SC_48_SH_0160__main_plate_v001####.mov"
+make_movie daily --input "<sourcedir>/GEN63_SC_48_SH_0160__main_plate_v001_camA_takeA_f4448x3096_####.exr" --output "<destdir>/GEN63_SC_48_SH_0160__main_plate_v001.mov"
+
+API:
+
+from mvl_make_dailies.movie_commands import create_movie_from_sequence
+
+data = {'input' : r'<path/to/sequence.####.exr>r, 'output': r'<path/to/mov_file.mov>'}
+
+create_movie_from_sequence(data)
+
+
