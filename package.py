@@ -9,13 +9,9 @@ authors = ['DEEPAK THAPLIYAL']
 help = [['README', 'README.md']] # Optional: If you have a README file
 
 requires = [
-    'nuke',
+     '~python-3',
     "mvl_core_pipeline",
-    '~python-3',    
-                     
-    # Add other Python dependencies here if your script uses them:
-    # 'pyside2-5.15+', # Example if your script has a PySide2 UI
-    # 'ocio-2.1+',     # Example if your script uses OpenColorIO Python bindings
+    "mvl_rezboot"
 ]
 
 private_build_requires = [

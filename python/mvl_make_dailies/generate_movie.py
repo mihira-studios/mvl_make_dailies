@@ -35,8 +35,7 @@ def add_arguments_from_keys(parser, keys):
             logger.error(f"Invalid type in argument '{name}': {e}")
         except Exception as e:
             logger.error(f"Failed to add argument '{name}': {e}")
-            
-        
+                  
 def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]

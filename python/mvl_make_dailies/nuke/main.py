@@ -4,11 +4,41 @@ import nuke
 import argparse
 import os
 import sys
-from mvl_make_dailies.common_utils import logger, create_temp_file, NukeTemplate, get_nuke_template_path
 import tempfile
 import uuid
 import json
+import logging
+from enum import Enum
+from mvl_core_pipeline.logger import Logger
+from mvl_core_pipeline import rez_utils
 
+logger = Logger(name='movie_generator', repo_name='rez-make-dailies').get_logger()
+logger.setLevel(logging.DEBUG)
+
+class NukeTemplate(Enum):
+    MVL_VFX_TEMPLATE_SLATE_AND_BURNIN = "MVL_VFX_Template_Slate_Overlay_v0.0.1.nk"
+
+def get_package_path()->str:
+    """
+    Get the package path for the mvl_make_dailies package.
+    This function retrieves the path from the environment variable REZ_MVL_MAKE_DAILIES_ROOT,  
+    which is set by Rez when the package is loaded. 
+    
+    Returns:
+        str: The path to the mvl_make_dailies package directory.
+    """
+    return rez_utils.get_repo_root('mvl_make_dailies')
+
+def get_nuke_template_path(template=NukeTemplate.MVL_VFX_TEMPLATE_SLATE_AND_BURNIN)->str:
+    """
+    Get the template path for the mvl_make_dailies package.
+    This function retrieves the path from the environment variable REZ_MVL_MAKE_DAILIES_ROOT,
+    which is set by Rez when the package is loaded.
+    If the environment variable is not set, it defaults to the current working directory.
+    Returns:
+        str: The normalized path to the mvl_make_dailies package's templates directory.
+    """
+    return os.path.join(get_package_path(), 'templates', "nuke", template.value)
 
 def normalize_path(path):
     """Ensure Windows paths use double backslashes for Nuke compatibility."""
@@ -43,8 +73,6 @@ def apply_knob_values(node_name, knob_data, logger=None):
         logger.error(f"Failed to set knob '{k}' to value '{v}': {e}")
         logger.debug(traceback.format_exc())
    
-
-
 def generate_movie(
     file_in_path,
     file_out_path,  
@@ -79,7 +107,13 @@ def generate_movie(
     nuke.scriptClear()
     nuke.root()['first_frame'].setValue(first)
     nuke.root()['last_frame'].setValue(last)
-    nuke.root()['format'].setValue(mvl_format) 
+    nuke.root()['format'].setValue(mvl_format)
+
+    slate_data.update({
+        "f_frames_first": first,
+        "f_frames_last": last,
+        "f_frames_duration": (last - first)
+    }) 
     
     # Import the Nuke script template
     nuke.nodePaste(get_nuke_template_path(NukeTemplate.MVL_VFX_TEMPLATE_SLATE_AND_BURNIN))
@@ -88,11 +122,15 @@ def generate_movie(
     read_node = nuke.toNode('MVL_READ')
     if read_node:
         read_node['file'].setValue(sequence_path_nomalized)
-        read_node['frame_mode'].setValue('sequence') 
+        read_node['frame_mode'].setValue('sequence')
+        read_node['first'].setValue(first + 1)
+        read_node['last'].setValue(last) 
 
     apply_knob_values('MVL_FORMAT', reformat_data, logger)
     apply_knob_values('MVL_COLORSPACE', colorspace_data, logger)
     apply_knob_values('MVL_READ', {'file': sequence_path_nomalized}, logger)
+
+   
     apply_knob_values('NETFLIX_TEMPLATE_SLATE', slate_data, logger)
     apply_knob_values('Netflix_MEI_Overlay', overlay_data, logger)
 
@@ -126,9 +164,9 @@ def main():
     code.
     :return: None   
     """
-    parser = argparse.ArgumentParser(description="Generate a movie from an image sequence using Nuke.")
-    parser.add_argument("src", help="Path to the input image sequence (e.g., /path/to/shot.####.exr)")
-    parser.add_argument("dst", help="Path for the output MOV file (e.g., /path/to/shot_dailies.mov)")
+    parser = argparse.ArgumentParser(fromfile_prefix_chars='@', description="Generate a movie from an image sequence using Nuke.")
+    parser.add_argument("--src", help="Path to the input image sequence (e.g., /path/to/shot.####.exr)")
+    parser.add_argument("--dst", help="Path for the output MOV file (e.g., /path/to/shot_dailies.mov)")
     parser.add_argument("--slate", type=str, default=None, help="Slate data as JSON string")
     parser.add_argument("--burnin", type=str, default=None, help="Burn-in data as JSON string")
     parser.add_argument("--reformat", type=str, default=None, help="Reformat data as JSON string")

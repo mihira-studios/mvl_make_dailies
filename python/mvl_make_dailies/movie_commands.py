@@ -6,12 +6,16 @@ import subprocess
 import tempfile
 import argparse
 import json
+import shlex
 from mvl_make_dailies.common_utils import (get_python_package_path, get_nuke_executable_path, 
                                            gather_frame_range, logger, 
                                            is_valid_frame_range, slate_keys, burn_in_keys, reformat_keys, colorspace_keys, writer_keys, read_keys)
 
+from mvl_rezboot import resolver
 
- 
+def escape_json_arg(data):
+    return '"' + json.dumps(data).replace('"', '\\"') + '"'
+
 def create_houdini_playblast(args_dict):
     """
     Create a playblast from a Houdini scene.
@@ -90,17 +94,11 @@ def create_movie_from_sequence(args_dict):
             frame_range = gather_frame_range(os.path.dirname(file_sequence_path))
 
         slate_start_frame = frame_range.start - 1 if args_dict.get("slate") else frame_range.start
-        logger.info(f"New Start frame : {slate_start_frame}")
         frame_range = range(slate_start_frame, frame_range.stop)
 
         mov_file_path = args_dict.get("output")
         if not mov_file_path or not mov_file_path.lower().endswith('.mov'):
             logger.error("Output file must be a .mov file.")
-            sys.exit(1)
-
-        nuke_exe = get_nuke_executable_path()
-        if not nuke_exe or not os.path.exists(nuke_exe):
-            logger.error("Nuke executable not found. Please ensure Nuke is installed and the path is set correctly.")
             sys.exit(1)
 
         # Collect metadata
@@ -110,39 +108,38 @@ def create_movie_from_sequence(args_dict):
         write_data = {k: args_dict[k] for k in writer_keys() if k in args_dict and args_dict[k] is not None}
         reformat_data = {k: args_dict[k] for k in reformat_keys() if k in args_dict and args_dict[k] is not None}
 
-        logger.info(f"burnin keys : {burn_in_keys()}")
-
-        cmd = [
-            nuke_exe,
-            "-F", f"{frame_range.start}-{frame_range.stop - 1}",
-            "-x", launcher_path,
-            file_sequence_path,
-            mov_file_path,
+        launcher_args = [
+            "--src", f"{file_sequence_path}",
+            "--dst", f"{mov_file_path}",
             "--slate", json.dumps(slate_data),
             "--burnin", json.dumps(burnin_data),
             "--reformat", json.dumps(reformat_data),
-            "--colorspace", json.dumps(colorspace_data),
+            "--colorspace",json.dumps(colorspace_data),
             "--write", json.dumps(write_data),
         ]
-        try:
-            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            stdout, stderr = process.communicate()
-            return_code = process.returncode
 
-            if return_code != 0:
-                logger.error(f"{dcc_name} process exited with non-zero status: {return_code}")
-                if stdout:
-                    logger.error(f"{dcc_name} STDOUT:\n{stdout.decode()}")
-                if stderr:
-                    logger.error(f"{dcc_name} STDERR:\n{stderr.decode()}")
-                sys.exit(return_code)
-            else:
-                logger.info(f"{dcc_name} process completed successfully.")
-                sys.exit(0)
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".txt") as f:
+            for arg in launcher_args:
+                f.write(arg + "\n")
+
+            args_file = f.name
+            
+        cmd = [
+            "-F", f"{frame_range.start}-{frame_range.stop}",
+            "-x", f"{launcher_path}",
+            f'@{args_file}',
+        ]
+
+        nuke_command_str = " ".join(cmd)
+
+        try:
+            from mvl_rezboot.resolver import Resolver
+            nuke_resolver = Resolver(f"nuke {nuke_command_str}")
+            nuke_resolver.run()       
 
         except Exception as e:
-            logger.error(f"Failed to launch Nuke subprocess: {e}", exc_info=True)
-            sys.exit(1)
+             logger.error(f"Failed to launch Nuke subprocess: {e}", exc_info=True)
+             sys.exit(1)
 
     except Exception as e:
         logger.error(f"Nuke movie render script failed: {e}", exc_info=True)
