@@ -12,6 +12,7 @@ from mvl_make_dailies.common_utils import (get_python_package_path, get_nuke_exe
                                            is_valid_frame_range, slate_keys, burn_in_keys, reformat_keys, colorspace_keys, writer_keys, read_keys)
 
 from mvl_rezboot import resolver
+from rez.exceptions import PackageCommandError
 
 def escape_json_arg(data):
     return '"' + json.dumps(data).replace('"', '\\"') + '"'
@@ -136,9 +137,9 @@ def create_movie_from_sequence(args_dict):
             from mvl_rezboot.resolver import Resolver
             nuke_resolver = Resolver(f"nuke {nuke_command_str}")
             nuke_resolver.run()       
-
-        except Exception as e:
-             logger.error(f"Failed to launch Nuke subprocess: {e}", exc_info=True)
+        
+        except PackageCommandError as e:
+             logger.error("Unable to creae mov file, Nuke launch failed: %s", str(e))
              sys.exit(1)
 
     except Exception as e:
