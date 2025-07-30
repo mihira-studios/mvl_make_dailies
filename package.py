@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 name = 'mvl_make_dailies'
-version = '0.2.0'
+version = '0.2.1'
 
 description = 'A Python script package for generating movies using Nuke.'
 
